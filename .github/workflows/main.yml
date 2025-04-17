@@ -78,14 +78,15 @@ jobs:
           docker push ${{ secrets.ACR_LOGIN_SERVER }}/user-service:${GITHUB_SHA}
           
   deploy_to_aks:
-    needs: build_and_push
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
 
       - name: Set up Azure CLI
-        uses: azure/setup-azurecli@v1
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
 
       - name: Log in to Azure
         uses: azure/login@v1
