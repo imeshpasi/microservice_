@@ -1,14 +1,12 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-slim
-
-# Set the working directory inside the container
+# Use Maven to build the app
+FROM maven:3.9.4-eclipse-temurin-17 AS builder
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy the application's JAR file into the container
-COPY ./target/auth-service.jar auth-service.jar
-
-# Expose the port the app runs on
+# Use JDK base image to run the app
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Run the application
-ENTRYPOINT ["java", "-jar", "auth-service.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
