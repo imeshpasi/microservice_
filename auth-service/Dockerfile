@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the application's JAR file into the container
-COPY target/auth-service.jar auth-service.jar
+COPY ./target/auth-service.jar auth-service.jar
 
 # Expose the port the app runs on
 EXPOSE 8080
