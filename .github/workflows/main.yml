@@ -25,7 +25,7 @@ jobs:
       - name: Log in to Azure Container Registry
         uses: azure/docker-login@v1
         with:
-          login-server: microservicecon.azurecr.io  # Azure ACR login server (e.g., myacr.azurecr.io)
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}  # Azure ACR login server (e.g., myacr.azurecr.io)
           username: microservicecon
           password: 3qZV8ZC53McCVQhwWMiVNT6sNFXymDYNVyV52L+lZ0+ACRAQ2gIl # ACR password
 
