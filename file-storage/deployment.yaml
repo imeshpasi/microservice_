@@ -1,0 +1,20 @@
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: file-storage
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: file-storage
+
+    template:
+      metadata:
+        labels:
+          app: file-storage
+      spec:
+        containers:
+        - name: file-storage
+          image: microservicecon.azurecr.io/file-storage
+          ports:
+          - containerPort: 8080
