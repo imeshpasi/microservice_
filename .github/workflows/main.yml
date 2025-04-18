@@ -78,6 +78,7 @@ jobs:
           docker push ${{ secrets.ACR_LOGIN_SERVER }}/user-service:${GITHUB_SHA}
           
   deploy_to_aks:
+    needs: build_and_push  # ⬅️ Ensures this job runs AFTER build_and_push succeeds
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
