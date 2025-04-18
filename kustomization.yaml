@@ -1,0 +1,9 @@
+resources:
+  - ./auth-service/deployment.yaml
+  - ./config-server/deployment.yaml
+  - ./eureka-server/deployment.yaml
+  - ./file-storage/deployment.yaml
+  - ./gateway/deployment.yaml
+  - ./job-service/deployment.yaml
+  - ./notification-service/deployment.yaml
+  - ./user-service/deployment.yaml
