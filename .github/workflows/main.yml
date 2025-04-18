@@ -3,7 +3,7 @@ name: Build and Push Docker Images to Azure Container Registry
 on:
   push:
     branches:
-      - main  # Trigger on changes to the main branch
+      - main
   pull_request:
     branches:
       - main
@@ -27,58 +27,58 @@ jobs:
         with:
           login-server: ${{ secrets.ACR_LOGIN_SERVER }}  # Azure ACR login server (e.g., myacr.azurecr.io)
           username: microservicecon  # ACR username
-          password: 3qZV8ZC53McCVQhwWMiVNT6sNFXymDYNVyV52L+lZ0+ACRAQ2gIl # Store your ACR password securely in GitHub Secrets
+          password: ${{ secrets.ACR_PASSWORD }}  # Store your ACR password securely in GitHub Secrets
 
-      # 4. Build Docker Image for auth-service and push to ACR
-      - name: Build Docker Image for auth-service
+      # 4. Build Docker Image for auth-service and push to ACR with latest and sha tag
+      - name: Build and Push Docker Image for auth-service
         run: |
-          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/auth-service:${GITHUB_SHA} ./auth-service
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/auth-service:${GITHUB_SHA}
+          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/auth-service:${GITHUB_SHA} --tag ${{ secrets.ACR_LOGIN_SERVER }}/auth-service:latest ./auth-service
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/auth-service:latest
 
-      # 5. Build Docker Image for config-server and push to ACR
-      - name: Build Docker Image for config-server
+      # 5. Build Docker Image for config-server and push to ACR with latest and sha tag
+      - name: Build and Push Docker Image for config-server
         run: |
-          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/config-server:${GITHUB_SHA} ./config-server
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/config-server:${GITHUB_SHA}
+          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/config-server:${GITHUB_SHA} --tag ${{ secrets.ACR_LOGIN_SERVER }}/config-server:latest ./config-server
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/config-server:latest
 
-      # 6. Build Docker Image for eureka-server and push to ACR
-      - name: Build Docker Image for eureka-server
+      # 6. Build Docker Image for eureka-server and push to ACR with latest and sha tag
+      - name: Build and Push Docker Image for eureka-server
         run: |
-          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/eureka-server:${GITHUB_SHA} ./eureka-server
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/eureka-server:${GITHUB_SHA}
+          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/eureka-server:${GITHUB_SHA} --tag ${{ secrets.ACR_LOGIN_SERVER }}/eureka-server:latest ./eureka-server
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/eureka-server:latest
 
-      # 7. Build Docker Image for file-storage and push to ACR
-      - name: Build Docker Image for file-storage
+      # 7. Build Docker Image for file-storage and push to ACR with latest and sha tag
+      - name: Build and Push Docker Image for file-storage
         run: |
-          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/file-storage:${GITHUB_SHA} ./file-storage
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/file-storage:${GITHUB_SHA}
+          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/file-storage:${GITHUB_SHA} --tag ${{ secrets.ACR_LOGIN_SERVER }}/file-storage:latest ./file-storage
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/file-storage:latest
 
-      # 8. Build Docker Image for gateway and push to ACR
-      - name: Build Docker Image for gateway
+      # 8. Build Docker Image for gateway and push to ACR with latest and sha tag
+      - name: Build and Push Docker Image for gateway
         run: |
-          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/gateway:${GITHUB_SHA} ./gateway
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/gateway:${GITHUB_SHA}
+          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/gateway:${GITHUB_SHA} --tag ${{ secrets.ACR_LOGIN_SERVER }}/gateway:latest ./gateway
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/gateway:latest
 
-      # 9. Build Docker Image for job-service and push to ACR
-      - name: Build Docker Image for job-service
+      # 9. Build Docker Image for job-service and push to ACR with latest and sha tag
+      - name: Build and Push Docker Image for job-service
         run: |
-          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/job-service:${GITHUB_SHA} ./job-service
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/job-service:${GITHUB_SHA}
+          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/job-service:${GITHUB_SHA} --tag ${{ secrets.ACR_LOGIN_SERVER }}/job-service:latest ./job-service
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/job-service:latest
 
-      # 10. Build Docker Image for notification-service and push to ACR
-      - name: Build Docker Image for notification-service
+      # 10. Build Docker Image for notification-service and push to ACR with latest and sha tag
+      - name: Build and Push Docker Image for notification-service
         run: |
-          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/notification-service:${GITHUB_SHA} ./notification-service
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/notification-service:${GITHUB_SHA}
+          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/notification-service:${GITHUB_SHA} --tag ${{ secrets.ACR_LOGIN_SERVER }}/notification-service:latest ./notification-service
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/notification-service:latest
 
-      # 11. Build Docker Image for user-service and push to ACR
-      - name: Build Docker Image for user-service
+      # 11. Build Docker Image for user-service and push to ACR with latest and sha tag
+      - name: Build and Push Docker Image for user-service
         run: |
-          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/user-service:${GITHUB_SHA} ./user-service
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/user-service:${GITHUB_SHA}
-          
+          docker buildx build --platform linux/amd64 --tag ${{ secrets.ACR_LOGIN_SERVER }}/user-service:${GITHUB_SHA} --tag ${{ secrets.ACR_LOGIN_SERVER }}/user-service:latest ./user-service
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/user-service:latest
+
   deploy_to_aks:
-    needs: build_and_push  # ⬅️ Ensures this job runs AFTER build_and_push succeeds
+    needs: build_and_push  # Ensures this job runs AFTER build_and_push succeeds
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -90,17 +90,14 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           allow-no-subscriptions: true
 
-
       - name: Set up kubectl
         uses: azure/setup-kubectl@v4
         with:
-         version: 'v1.28.2'  # Specify the desired kubectl version
-
+          version: 'v1.28.2'  # Specify the desired kubectl version
 
       - name: Get AKS credentials
         run: |
           az aks get-credentials --resource-group ${{ secrets.AKS_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }}
 
       - name: Deploy all services using Kustomize
-        run: kubectl apply -k .
-         
+        run: kubectl apply -k .  # Deploy using Kustomize
